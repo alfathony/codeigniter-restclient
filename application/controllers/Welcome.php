@@ -20,33 +20,22 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		// $this->load->view('welcome_message');
 
 
 		// Load the rest client spark
-		$this->load->spark('restclient/2.2.1');
+		// $this->load->spark('restclient/2.2.1');
 
 		// Load the library
 		$this->load->library('rest');
 
 		// Set config options (only 'server' is required to work)
 
-		$config = array('server'            => 'https://cozer.id/',
-		                //'api_key'         => 'Setec_Astronomy'
-		                //'api_name'        => 'X-API-KEY'
-		                //'http_user'       => 'username',
-		                //'http_pass'       => 'password',
-		                //'http_auth'       => 'basic',
-		                //'ssl_verify_peer' => TRUE,
-		                //'ssl_cainfo'      => '/certs/cert.pem'
-		                );
-
-		// Run some setup
-		$this->rest->initialize($config);
-
+		$this->rest->initialize(array('server' => 'https://api.twitter.com','http_auth' => 'basic','ssl_verify_peer' => TRUE,));
+		$username = 'radityadika';
 		// Pull in an array of tweets
-		$tweets = $this->rest->get('statuses/user_timeline/'.$radityadika.'.xml');
+		$data['tweets'] = $this->rest->get('/1.1/statuses/user_timeline.json?screen_name='.$username);
 
+		$this->load->view('welcome_message',$data);
 
 	}
 }

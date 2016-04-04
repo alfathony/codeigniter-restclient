@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+echo print_r($tweets);
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
